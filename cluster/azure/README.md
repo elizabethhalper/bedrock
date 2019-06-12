@@ -103,7 +103,7 @@ This is a two step process:
 
 #### Copy Terraform Template
 
-The typical way to create a new environment is to start from an existing template. To create a cluster environment based on the `azure-simple` template, for example, copy it to a new subdirectory with the name of the cluster you want to create:
+The typical way to create a new environment is to start from an existing template. For example, to create a cluster environment based on the `azure-simple` template, while in the bedrock directory, copy it to a new subdirectory with the name of the cluster you want to create:
 
 ```bash
 $ cp -r cluster/environments/azure-simple cluster/environments/<your new cluster name>
@@ -115,7 +115,7 @@ In this case, we are creating it within the Bedrock tree, but the deployment tem
 
 Most Bedrock deployment environments share a common set of configuration values. Listed below are the common set of values and an explanation of those values. In addition to these common values, environments that have additional variables, check the `variables.tf` file for your template for specifics.
 
-With the new environment created, edit `environments/azure/<your new cluster name>/terraform.tfvars` and update the variables as needed.
+With the new environment created, edit or create `environments/azure/<your new cluster name>/terraform.tfvars` and update the variables as needed.
 
 The common variables:
 
