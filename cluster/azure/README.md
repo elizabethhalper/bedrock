@@ -25,27 +25,26 @@ Bedrock provides different templates to start from when building your deployment
 
 The following templates are currently available for deployment:
 
-- [azure-common-infra](../environments/azure-common-infra): Common infrastructure deployment template.
-
-- [azure-simple](../environments/azure-simple/): Single cluster deployment.
-- [azure-single-keyvault](../environments/azure-single-keyvault): Single cluster with Azure Keyvault integration through flex volumes template.
+- [azure-common-infra](../environments/azure-common-infra): Common infrastructure deployment template. This deploys a single cluster with a storage account, a key vault, and role-based access control.
+- [azure-simple](../environments/azure-simple/): Simple single cluster deployment.
+- [azure-single-keyvault](../environments/azure-single-keyvault): Single cluster deployment with Azure Keyvault integration through flex volumes template.
 - [azure-multiple-clusters](../environments/azure-multiple-clusters/): Multiple cluster deployment with Traffic Manager.
 
 The common steps necessary to deploy a cluster are:
 
-- [Create an Azure service principal](#create-an-azure-service-principal)
-- [Configure Terraform CLI to use the Azure Service Principal](#configure-terraform-cli-for-azure)
-- [Create Terraform configuration files](#create-terraform-configuration-files)
-- [Create the AKS cluster using Terraform](#create-the-aks-cluster-using-terraform)
-- [Configure `kubectl` to see your new AKS cluster](#configure-kubectl-to-see-your-new-aks-cluster)
-- [Verify that your AKS cluster is healthy](#verify-that-your-aks-cluster-is-healthy)
+1. [Create an Azure service principal](#create-an-azure-service-principal)
+2. [Configure Terraform CLI to use the Azure Service Principal](#configure-terraform-cli-for-azure)
+3. [Create Terraform configuration files](#create-terraform-configuration-files)
+4. [Create the AKS cluster using Terraform](#create-the-aks-cluster-using-terraform)
+5. [Configure `kubectl` to see your new AKS cluster](#configure-kubectl-to-see-your-new-aks-cluster)
+6. [Verify that your AKS cluster is healthy](#verify-that-your-aks-cluster-is-healthy)
 
 ### Create an Azure Service Principal
 
-You can generate an Azure Service Principal using the [`az ad sp create-for-rbac`](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create) command with `--skip-assignment` option. The `--skip-assignment` parameter limits any additional permissions from being assigned the default [`Contributor`](https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles#azure-rbac-roles) role in Azure subscription.
+You can generate an Azure Service Principal using the [`az ad sp create-for-rbac`](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create) command with `--skip-assignment` option. The `--skip-assignment` parameter limits any additional permissions from being assigned the default [`Contributor`](https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles#azure-rbac-roles) role in Azure subscription. Make sure that you are [logged in](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-set) to the correct Azure subscription before running the command.
 
 ```bash
-$ az ad sp create-for-rbac --subscription <id | name>
+$ az ad sp create-for-rbac
 ```
 
 The output of the above commands will look something like this:
