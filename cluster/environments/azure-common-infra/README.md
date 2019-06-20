@@ -92,4 +92,4 @@ tenant_id = "<tenantId>"
 
 Execute `terraform init -backend-config=./backend.tfvars`.
 
-If `terraform init` succeeds, execute `terraform apply -var-file=./terraform.tfvars`.
+If `terraform init` succeeds, execute `terraform apply -var-file=./terraform.tfvars`. If this succeeds, your cluster, storage account, and key vault have been deployed. Your next step is to [configure kubectl](https://github.com/microsoft/bedrock/tree/master/cluster/azure#configure-kubectl-to-see-your-new-aks-cluster).
